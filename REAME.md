@@ -7,8 +7,9 @@
 **Mã học viên:** 2A202602749
 
 **Dự án chọn làm:** AI gateway - AIP01
- · 
+
 **LINK:**[Metric Pack](MetricPack.md)
+
 # Điều tôi mang về áp dụng cho dự án thật: 
 
 - Xác định core action là người quản lý kiểm tra kết quả routing và quyết định giữ nguyên hoặc điều chỉnh policy. - Đo activation bằng lần kiểm tra hợp lệ đầu tiên trong 7 ngày, đo engagement bằng tỷ lệ hoàn tất kiểm tra và phạm vi team/project được quản lý; đo retention theo lịch kiểm tra thực tế. → Chỉ ghi nhận hoàn tất khi có dữ liệu request, kết quả đối chiếu và quyết định được lưu. 

@@ -1,10 +1,9 @@
 # Day 20: Product Metrics - Retention & Engagement
 **Thông tin cá nhân**
 
-**Họ tên**: Lê Duy Bảo - **Mã học viên:** 2A202602749
+**Họ tên**: Lê Duy Bảo
 
-
-
+**Mã học viên:** 2A202602749
 
 ## Phase 0 - Phạm vi
 
@@ -79,7 +78,7 @@
 | Thành phần | Câu trả lời |
 |---|---|
 | Start event | `routing_setup_started`: người quản lý bắt đầu thiết lập policies routing và config riêng cho các team/project nếu có. |
-| Activation event | `routing_review_completed` đầu tiên sau khi policy có hiệu lực và có request thực tế. |
+| Activation event | `routing_completed` đầu tiên sau khi policy có hiệu lực và có request thực tế. |
 | Time window | Activation rate = người quản lý activated trong 7 ngày / người bắt đầu thiết lập đã có đủ 7 ngày quan sát. |
 
 ### Engagement metric
@@ -94,7 +93,7 @@
 |---|---|
 | Unit | Một người quản lý, xác định bằng user ID. |
 | Cohort entry | Tuần người quản lý hoàn thành activation lần đầu. |
-| Return event | Hoàn tất ít nhất một `routing_review_completed` cho nhu cầu kiểm tra mới. |
+| Return event | Hoàn tất ít nhất một `routing_completed` cho nhu cầu kiểm tra mới. |
 | Window | Tuần W1, W2, W3… sau tuần activation W0; đề xuất cho pilot có lịch kiểm tra hàng tuần. |
 | Threshold | Ít nhất một lượt kiểm tra hợp lệ trong tuần; chưa dùng ngưỡng này để xác định core user. |
 | Segment | Theo số team/project phụ trách, workload và lịch kiểm tra; báo riêng người không có nhu cầu kiểm tra trong kỳ. |
@@ -132,18 +131,18 @@
 
 | Tên event | Ý nghĩa | Ghi nhận lúc | Metric dùng |
 |---|---|---|---|
-| `team_routing_setup_started` | Bắt đầu thiết lập routing cho team/project | Khi cấu hình đầu tiên được lưu | Activation rate |
+| `routing_setup_started` | Bắt đầu thiết lập routing cho team/project | Khi cấu hình đầu tiên được lưu | Activation rate |
 | `routing_review_due` | Một nhu cầu kiểm tra đến hạn hoặc được tạo từ bất thường | Khi hệ thống xác định một lượt kiểm tra cần thực hiện | Mẫu số review completion rate; management coverage |
 | `routing_review_data_ready` | Đủ dữ liệu bắt buộc cho lượt kiểm tra | Khi dữ liệu đáp ứng điều kiện kiểm tra | Tỷ lệ team/project có đủ dữ liệu |
 | `routing_review_started` | Người quản lý bắt đầu lượt kiểm tra | Khi mở và bắt đầu xử lý một review cụ thể | Thời gian hoàn tất kiểm tra |
-| `routing_review_completed` | Đã đối chiếu dữ liệu và ghi nhận quyết định hợp lệ | Khi quyết định được lưu; nếu thay đổi, policy mới đã áp dụng thành công | Activation; engagement; retention; North Star; thời gian kiểm tra |
+| `routing_completed` | Đã đối chiếu dữ liệu và ghi nhận quyết định hợp lệ | Khi quyết định được lưu; nếu thay đổi, policy mới đã áp dụng thành công | Activation; engagement; retention; North Star; thời gian kiểm tra |
 | `gateway_request_completed` | Request kết thúc với response hoặc lỗi | Khi request hoàn tất hoặc bị chặn/thất bại | Policy/budget compliance; latency violation |
 | `output_quality_evaluated` | Output trong mẫu đã được chấm chất lượng | Khi validator hoặc người chấm hoàn tất | Tỷ lệ output không đạt chất lượng |
 
 **Tiêu chí nghiệm thu:**
 
 - Mỗi review có review ID, user ID, team/project ID, kỳ dữ liệu và policy version; không đếm trùng khi tải lại trang hoặc lưu lại.
-- Chỉ ghi `routing_review_completed` khi có dữ liệu thực tế, kết quả đối chiếu và quyết định; mở dashboard chưa được tính hoàn tất.
+- Chỉ ghi `routing_completed` khi có dữ liệu thực tế, kết quả đối chiếu và quyết định; mở dashboard chưa được tính hoàn tất.
 - Team/project chỉ được tính một lần trong North Star mỗi tuần và phải hoàn tất các lượt kiểm tra đến hạn trong tuần đó.
 - Phân biệt dữ liệu thiếu với kết quả đạt; kiểm tra thủ công event, trace và quyết định trên ít nhất 5 lượt kiểm tra.
 
@@ -159,14 +158,5 @@
 - [x] Mọi event đều dùng để tính một metric
 - [x] Metric nào cũng có event để tính
 
-
-
-### AI Support Log
-
-**AI đã giúp tôi ở đâu?:** …
-
-**AI sai, hời hợt, hoặc gợi metric sai nature ở đâu?:** …
-
-**Tôi đã tự sửa hoặc quyết định lại điều gì?:** …
 
 
